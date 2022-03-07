@@ -16,4 +16,3 @@ Running the tests:
 6) Your token will be saved as token.json in the sisu_gmail directory.
 
 7) Tests should now attempt to complete using your creds.
-# sisu_gmail
