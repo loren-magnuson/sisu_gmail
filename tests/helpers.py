@@ -24,7 +24,8 @@ def get_app_creds_and_user_token():
         except FileNotFoundError:
             sisu_gmail.start_auth_flow(
                 settings.TEST_APP_CREDS,
-                settings.TEST_USER_TOKEN
+                settings.TEST_USER_TOKEN,
+                settings.TEST_AUTH_SCOPES
             )
         else:
             return app_creds, token

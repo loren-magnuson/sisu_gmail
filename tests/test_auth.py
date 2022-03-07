@@ -17,7 +17,7 @@ class TestAuth(helpers.GmailTestCase):
             path_to_token = sisu_gmail.start_auth_flow(
                 settings.TEST_APP_CREDS,
                 settings.TEST_USER_TOKEN,
-                scopes=settings.TEST_AUTH_SCOPE
+                scopes=settings.TEST_AUTH_SCOPES
             )
             self.assertEqual(None, path_to_token)
 
@@ -29,6 +29,12 @@ class TestAuth(helpers.GmailTestCase):
         credentials = sisu_gmail.creds_from_json(self.user_token)
         resource = sisu_gmail.authorize_resource(credentials)
         self.assertIsInstance(resource, Resource)
+
+    def test_refresh_token(self):
+        credentials = sisu_gmail.creds_from_json(self.user_token)
+        old_expirty = credentials.__dict__['expiry']
+        new_expiry = sisu_gmail.refresh_token(credentials).__dict__['expiry']
+        self.assertNotEqual(old_expirty, new_expiry)
 
 
 if __name__ == '__main__':
