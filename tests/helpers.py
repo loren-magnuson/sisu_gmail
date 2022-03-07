@@ -48,8 +48,16 @@ def load_test_resource(user_token):
     return sisu_gmail.auth.authorize_resource(credentials)
 
 
-class GmailTestCase(unittest.TestCase):
+def insert_test_email(resource):
+    """Insert email with text and image, excel, pdf attachments
 
+    :param resource: Gmail API Resource
+    :return: id of created email
+    """
+
+
+class GmailTestCase(unittest.TestCase):
+    """Setups up the resources to test facets of sisu_gmail"""
     def __init__(self, *args, **kwargs):
         super(GmailTestCase, self).__init__(*args, **kwargs)
         self.app_creds, self.user_token = get_app_creds_and_user_token()
