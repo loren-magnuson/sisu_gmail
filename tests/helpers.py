@@ -49,11 +49,9 @@ def load_test_resource(user_token):
     return sisu_gmail.auth.authorize_resource(credentials)
 
 
-def send_test_email(resource, user_id, address, subject, text):
-    """Insert email with text and image, excel, pdf attachments
+def create_test_email(address, subject, text):
+    """Create multipart message for testing
 
-    :param resource: Gmail API Resource
-    :param user_id: Gmail API userId
     :param address:
     :param subject:
     :param text:
@@ -65,11 +63,7 @@ def send_test_email(resource, user_id, address, subject, text):
         subject,
         text
     )
-    sisu_gmail.send.send_message(
-        resource,
-        user_id,
-        message
-    )
+    return message
 
 
 class GmailTestCase(unittest.TestCase):
