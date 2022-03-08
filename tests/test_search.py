@@ -3,7 +3,7 @@ from src.sisu_gmail import search
 from tests import helpers
 
 
-class TestAuth(helpers.GmailTestCase):
+class TestSearch(helpers.GmailTestCase):
 
     def test_search(self):
         response = search.search(

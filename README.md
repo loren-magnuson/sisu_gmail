@@ -3,6 +3,8 @@
 
 Running the tests:
 
+1a) Create an **unused gmail address** for testing
+
 1) git clone https://github.com/loren-magnuson/sisu_gmail
 
 2) cd sisu_gmail

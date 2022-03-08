@@ -2,6 +2,7 @@ import logging
 import sys
 import unittest
 import json
+import sisu_email.create
 import src.sisu_gmail.auth
 from json import JSONDecodeError
 from src import sisu_gmail
@@ -15,7 +16,7 @@ def load_json_file(path):
 
 def get_app_creds_and_user_token():
     """Tries to load saved test app creds and user token
-    If there are no app credsthis cannot continue
+    If there are no app creds this cannot continue
     If there is no user token we try to get one using the app creds
 
     :return: tuple, dict of app creds, dict of user token
@@ -54,6 +55,8 @@ def insert_test_email(resource):
     :param resource: Gmail API Resource
     :return: id of created email
     """
+    pass
+    # sisu_email.create.create_multipart_message()
 
 
 class GmailTestCase(unittest.TestCase):
