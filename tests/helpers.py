@@ -49,20 +49,43 @@ def load_test_resource(user_token):
     return sisu_gmail.auth.authorize_resource(credentials)
 
 
-def insert_test_email(resource):
+def send_test_email(resource, user_id, address, subject, text):
     """Insert email with text and image, excel, pdf attachments
 
     :param resource: Gmail API Resource
+    :param user_id: Gmail API userId
+    :param address:
+    :param subject:
+    :param text:
     :return: id of created email
     """
-    pass
-    # sisu_email.create.create_multipart_message()
+    message = sisu_email.create.create_multipart_message(
+        address,
+        address,
+        subject,
+        text
+    )
+    sisu_gmail.send.send_message(
+        resource,
+        user_id,
+        message
+    )
 
 
 class GmailTestCase(unittest.TestCase):
+
     """Setups up the resources to test facets of sisu_gmail"""
     def __init__(self, *args, **kwargs):
         super(GmailTestCase, self).__init__(*args, **kwargs)
         self.app_creds, self.user_token = get_app_creds_and_user_token()
         self.resource = load_test_resource(self.user_token)
         self.query = settings.TEST_SEARCH_QUERY
+        self.user_id = 'me'
+        self.test_email_address = self.set_test_email_address()
+
+    def set_test_email_address(self):
+        self.test_email_address = sisu_gmail.user.get_profile(
+            self.resource,
+            self.user_id
+        )['emailAddress']
+        return self.test_email_address

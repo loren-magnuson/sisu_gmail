@@ -14,3 +14,7 @@ class TestUser(helpers.GmailTestCase):
         self.assertIn('historyId', response)
         self.assertIn('messagesTotal', response)
         self.assertIn('threadsTotal', response)
+
+
+if __name__ == '__main__':
+    unittest.main()

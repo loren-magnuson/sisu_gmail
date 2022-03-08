@@ -19,7 +19,7 @@ def search(resource, query):
 
     :param resource: Gmail API resource
     :param query: str, Gmail API search query
-    :return: gmail api search response
+    :return: Gmail API search response
     """
     return resource.users().messages().list(
         userId='me',
