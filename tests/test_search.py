@@ -49,7 +49,7 @@ class TestSearch(helpers.GmailTestCase):
         self.assertIn('messages', response)
         self.assertEqual(len(response['messages']), 1)
 
-        # We should 1 more result on the next page
+        # We should get 1 more result on the next page
         response = search.next_page(
             self.resource,
             self.query,
