@@ -115,6 +115,7 @@ class GmailTestCase(unittest.TestCase):
         # Just trying to prevent operating on "non-existent" emails
         sleep(3)
         if len(self.test_emails) > 0:
+            print(self.test_emails)
             delete.batch_delete(
                 self.resource,
                 self.user_id,
