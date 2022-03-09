@@ -11,7 +11,7 @@ def start_auth_flow(app_creds_path, token_path, scopes):
     :param app_creds_path: path_to_app_creds to app_creds.json file
     :param token_path: path_to_app_creds to store resulting auth app_creds
     :param scopes: Gmail API permission scope to request
-    :return: token_path to the app_creds if created else None
+    :return: token_path to the app_creds
     """
     creds = None
     if os.path.exists(token_path):
@@ -19,7 +19,6 @@ def start_auth_flow(app_creds_path, token_path, scopes):
             token_path,
             scopes
         )
-        return token_path
 
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
@@ -30,9 +29,8 @@ def start_auth_flow(app_creds_path, token_path, scopes):
 
         with open(token_path, 'w') as token_file:
             token_file.write(creds.to_json())
-            return token_path
 
-    return None
+    return token_path
 
 
 def authorize_resource(credentials):

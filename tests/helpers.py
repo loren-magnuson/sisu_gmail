@@ -56,7 +56,7 @@ def load_test_resource(user_token):
 
 
 def create_test_email(address, subject, text):
-    """Create multipart message for testing
+    """Create multipart message_id for testing
 
     :param address:
     :param subject:
@@ -97,7 +97,7 @@ def send_test_emails(resource, user_id, sender, subject, text, count=1):
             raise KeyError('Test email failed to send')
     else:
         # Sleeping here prevents us from trying to operate on "nonexistent" messages
-        sleep(5)
+        sleep(3)
         return messages
 
 

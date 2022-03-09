@@ -2,7 +2,7 @@ import sisu_email.create
 
 
 def encode_multipart_message(message):
-    """Encode multipart message as urlsafe base64 string
+    """Encode multipart message_id as urlsafe base64 string
 
     :param message: email.mime.multipart.MIMEMultipart
     :return: dict, {'raw': base64_string_of_message}

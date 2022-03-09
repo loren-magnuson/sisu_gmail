@@ -9,7 +9,7 @@ def next_page(resource, query, response, max_results=100):
     :param query: str, Gmail API search query
     :param response: dict, Gmail API search query response
     :param max_results: int, number of results per request
-    :return: list, dicts of gmail message message_ids and thread message_ids
+    :return: list, dicts of gmail message_id message_ids and thread message_ids
     """
     if not type(response) is dict:
         raise TypeError(
@@ -49,7 +49,7 @@ def iter_messages(resource, query):
 
     :param resource: Gmail API resource
     :param query: str, Gmail API search query
-    :return: dict, gmail message message_ids and thread message_ids
+    :return: dict, gmail message_id message_ids and thread message_ids
     """
     response = resource.users().messages().list(
         userId='me',

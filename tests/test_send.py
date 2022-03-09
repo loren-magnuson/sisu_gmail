@@ -27,7 +27,7 @@ class TestSend(helpers.GmailTestCase):
         self.assertIn('INBOX', labels)
 
         # Just trying to prevent operating on "non-existent" emails
-        sleep(5)
+        sleep(3)
         delete.delete_message(self.resource, self.user_id, response['id'])
 
 

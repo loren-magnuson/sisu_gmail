@@ -8,7 +8,7 @@ from tests import helpers
 class TestCreate(helpers.GmailTestCase):
 
     def test_encode_multipart_message(self):
-        """Encode multipart message as urlsafe base64 string
+        """Encode multipart message_id as urlsafe base64 string
 
         :return: dict, {'raw': base64_string_of_message}
         """
