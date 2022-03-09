@@ -2,10 +2,13 @@ import logging
 import sys
 import unittest
 import json
+from time import sleep
+
 import sisu_email.create
 import src.sisu_gmail.auth
 from json import JSONDecodeError
 from src import sisu_gmail
+from src.sisu_gmail import send, create
 from tests import settings
 
 
@@ -21,6 +24,7 @@ def get_app_creds_and_user_token():
 
     :return: tuple, dict of app creds, dict of user token
     """
+    token = None
     try:
         app_creds = load_json_file(settings.TEST_APP_CREDS)
     except JSONDecodeError:
@@ -35,7 +39,9 @@ def get_app_creds_and_user_token():
                 settings.TEST_USER_TOKEN,
                 settings.TEST_AUTH_SCOPES
             )
-        else:
+        finally:
+            if token is None:
+                token = load_json_file(settings.TEST_USER_TOKEN)
             return app_creds, token
 
 
@@ -64,6 +70,35 @@ def create_test_email(address, subject, text):
         text
     )
     return message
+
+
+def send_test_emails(resource, user_id, sender, subject, text, count=1):
+    """Send a batch of test emails
+
+    :param resource: Gmail API resource
+    :param user_id: Gmail API userId
+    :param sender: sender Gmail address
+    :param subject: subject line
+    :param text: tex for body of email
+    :param count: number to send
+    :return: count of emails sent
+    """
+    messages = []
+    for i in range(0, count):
+        message = create_test_email(sender, subject, text)
+        response = send.send_message(
+            resource,
+            user_id,
+            create.encode_multipart_message(message)
+        )
+        if 'id' in response:
+            messages.append(response)
+        else:
+            raise KeyError('Test email failed to send')
+    else:
+        # Sleeping here prevents us from trying to operate on "nonexistent" messages
+        sleep(5)
+        return messages
 
 
 class GmailTestCase(unittest.TestCase):

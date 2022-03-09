@@ -1,29 +1,46 @@
-def next_search_page(resource, response, query):
-    """
+class NoNextPageToken(KeyError):
+    pass
+
+
+def next_page(resource, query, response, max_results=100):
+    """Get next page of search results
 
     :param resource: Gmail API resource
-    :param response: response from a gmail api search query
     :param query: str, Gmail API search query
-    :return: list, dicts of gmail message ids and thread ids
+    :param response: dict, Gmail API search query response
+    :param max_results: int, number of results per request
+    :return: list, dicts of gmail message message_ids and thread message_ids
     """
+    if not type(response) is dict:
+        raise TypeError(
+            'next_search_page requires dict as response param'
+        )
+    elif 'nextPageToken' not in response:
+        raise NoNextPageToken(
+            'next_search_page requires dict with nextPageToken key'
+        )
+
     page_token = response['nextPageToken']
     return resource.users().messages().list(
         userId='me',
         q=query,
-        pageToken=page_token
+        pageToken=page_token,
+        maxResults=max_results
     ).execute()
 
 
-def search(resource, query):
+def search(resource, query, max_results=100):
     """Return search results response for a Gmail API query
 
     :param resource: Gmail API resource
     :param query: str, Gmail API search query
+    :param max_results: int, number of results per request
     :return: Gmail API search response
     """
     return resource.users().messages().list(
         userId='me',
-        q=query
+        q=query,
+        maxResults=max_results
     ).execute()
 
 
@@ -32,7 +49,7 @@ def iter_messages(resource, query):
 
     :param resource: Gmail API resource
     :param query: str, Gmail API search query
-    :return: dict, gmail message ids and thread ids
+    :return: dict, gmail message message_ids and thread message_ids
     """
     response = resource.users().messages().list(
         userId='me',
@@ -46,4 +63,4 @@ def iter_messages(resource, query):
     for index, result in enumerate(part, start=1):
         yield result
         if len(part) == index and 'nextPageToken' in response:
-            next_search_page(resource, response, query)
+            next_page(resource, response, query)

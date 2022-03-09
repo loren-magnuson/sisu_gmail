@@ -27,8 +27,8 @@ def start_auth_flow(app_creds_path, token_path, scopes):
             flow = InstalledAppFlow.from_client_secrets_file(app_creds_path, scopes)
             creds = flow.run_local_server(port=0)
 
-        with open(token_path, 'w') as token_path:
-            token_path.write(creds.to_json())
+        with open(token_path, 'w') as token_file:
+            token_file.write(creds.to_json())
             return token_path
 
 
