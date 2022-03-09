@@ -1,5 +1,5 @@
 import unittest
-from src.sisu_gmail import search, delete
+from src.sisu_gmail import search
 from src.sisu_gmail.search import NoNextPageToken
 from tests import helpers
 
@@ -7,20 +7,13 @@ from tests import helpers
 class TestSearch(helpers.GmailTestCase):
 
     def setUp(self):
-        self.messages = helpers.send_test_emails(
+        self.test_emails += helpers.send_test_emails(
             self.resource,
             self.user_id,
             self.test_email_address,
-            'sisu_gmail test_search',
-            'sisu_gmail test_search',
+            'sisu_gmail TestSearch',
+            'sisu_gmail TestSearch',
             count=2
-        )
-
-    def tearDown(self):
-        delete.batch_delete(
-            self.resource,
-            self.user_id,
-            message_ids=self.messages
         )
 
     def test_search(self):

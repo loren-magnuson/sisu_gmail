@@ -14,7 +14,7 @@ def delete_message(resource, user_id, message_id):
 
 
 def batch_delete(resource, user_id, message_ids):
-    """Batch delete messages a list of Gmail messages
+    """Batch delete a list of Gmail messages
 
     :param resource: Gmail API Resource
     :param user_id: message_id owner Gmail API userId

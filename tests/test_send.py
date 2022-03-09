@@ -1,22 +1,20 @@
 import unittest
-from time import sleep
-from src.sisu_gmail import send, create, delete
+from src.sisu_gmail import send, create
 from tests import helpers
 
 
 class TestSend(helpers.GmailTestCase):
 
     def test_send_message(self):
-        message = helpers.create_test_email(
+        emails = helpers.send_test_emails(
+            self.resource,
+            self.user_id,
             self.test_email_address,
             'sisu_gmail test_send_message',
             'sisu_gmail test_send_message'
         )
-        response = send.send_message(
-            self.resource,
-            self.user_id,
-            create.encode_multipart_message(message)
-        )
+        self.test_emails += emails
+        response = emails[0]
         self.assertIn('id', response)
         self.assertIn('threadId', response)
         self.assertIn('labelIds', response)
@@ -25,10 +23,6 @@ class TestSend(helpers.GmailTestCase):
         self.assertIn('UNREAD', labels)
         self.assertIn('SENT', labels)
         self.assertIn('INBOX', labels)
-
-        # Just trying to prevent operating on "non-existent" emails
-        sleep(3)
-        delete.delete_message(self.resource, self.user_id, response['id'])
 
 
 if __name__ == '__main__':

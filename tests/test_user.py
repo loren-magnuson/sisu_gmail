@@ -6,10 +6,7 @@ from tests import helpers
 class TestUser(helpers.GmailTestCase):
 
     def test_get_profile(self):
-        response = user.get_profile(
-            self.resource,
-            'me'
-        )
+        response = user.get_profile(self.resource, 'me')
         self.assertIn('emailAddress', response)
         self.assertIn('historyId', response)
         self.assertIn('messagesTotal', response)

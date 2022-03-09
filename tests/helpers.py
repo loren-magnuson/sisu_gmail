@@ -2,13 +2,12 @@ import logging
 import sys
 import unittest
 import json
-from time import sleep
-
 import sisu_email.create
 import src.sisu_gmail.auth
+from time import sleep
 from json import JSONDecodeError
 from src import sisu_gmail
-from src.sisu_gmail import send, create
+from src.sisu_gmail import send, create, delete
 from tests import settings
 
 
@@ -111,6 +110,17 @@ class GmailTestCase(unittest.TestCase):
         self.query = settings.TEST_SEARCH_QUERY
         self.user_id = 'me'
         self.test_email_address = self.set_test_email_address()
+        self.test_emails = []
+
+    def tearDown(self):
+        # Just trying to prevent operating on "non-existent" emails
+        sleep(3)
+        if len(self.test_emails) > 0:
+            delete.batch_delete(
+                self.resource,
+                self.user_id,
+                message_ids=self.test_emails
+            )
 
     def set_test_email_address(self):
         self.test_email_address = sisu_gmail.user.get_profile(
