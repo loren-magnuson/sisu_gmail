@@ -1,3 +1,4 @@
+import inspect
 import unittest
 from src.sisu_gmail import read
 from tests import helpers
@@ -10,8 +11,8 @@ class TestRead(helpers.GmailTestCase):
             self.resource,
             self.user_id,
             self.test_email_address,
-            'sisu_gmail test_label_message',
-            'sisu_gmail test_label_message',
+            inspect.stack()[0][3],
+            inspect.stack()[0][3],
             count=1
         )
         self.test_emails += emails

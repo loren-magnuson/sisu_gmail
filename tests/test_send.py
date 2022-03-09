@@ -1,3 +1,4 @@
+import inspect
 import unittest
 from tests import helpers
 
@@ -9,8 +10,8 @@ class TestSend(helpers.GmailTestCase):
             self.resource,
             self.user_id,
             self.test_email_address,
-            'sisu_gmail test_send_message',
-            'sisu_gmail test_send_message'
+            inspect.stack()[0][3],
+            inspect.stack()[0][3]
         )
         self.test_emails += emails
         response = emails[0]

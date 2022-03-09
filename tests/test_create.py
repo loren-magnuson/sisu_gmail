@@ -1,4 +1,5 @@
 import base64
+import inspect
 import unittest
 import sisu_email.create
 from src.sisu_gmail import create
@@ -15,8 +16,8 @@ class TestCreate(helpers.GmailTestCase):
         message = sisu_email.create.create_multipart_message(
             self.test_email_address,
             self.test_email_address,
-            'sisu_gmail test_encode_multipart_message',
-            'sisu_gmail test_encode_multipart_message'
+            inspect.stack()[0][3],
+            inspect.stack()[0][3]
         )
         text_repr = str(message)
         encoded = create.encode_multipart_message(message)

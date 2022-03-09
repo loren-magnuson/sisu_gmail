@@ -1,3 +1,4 @@
+import inspect
 import unittest
 from src.sisu_gmail import search
 from src.sisu_gmail.search import NoNextPageToken
@@ -11,8 +12,8 @@ class TestSearch(helpers.GmailTestCase):
             self.resource,
             self.user_id,
             self.test_email_address,
-            'sisu_gmail TestSearch',
-            'sisu_gmail TestSearch',
+            f'TestSearch {inspect.stack()[0][3]}',
+            f'TestSearch {inspect.stack()[0][3]}',
             count=2
         )
 

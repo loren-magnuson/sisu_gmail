@@ -1,3 +1,4 @@
+import inspect
 import unittest
 from time import sleep
 from src.sisu_gmail import delete, search
@@ -11,8 +12,8 @@ class TestDelete(helpers.GmailTestCase):
             self.resource,
             self.user_id,
             self.test_email_address,
-            'sisu_gmail test_batch_delete',
-            'sisu_gmail test_batch_delete',
+            inspect.stack()[0][3],
+            inspect.stack()[0][3],
             count=2
         )
 
@@ -43,8 +44,8 @@ class TestDelete(helpers.GmailTestCase):
             self.resource,
             self.user_id,
             self.test_email_address,
-            'sisu_gmail test_delete_message',
-            'sisu_gmail test_delete_message',
+            inspect.stack()[0][3],
+            inspect.stack()[0][3],
             count=1
         )[0]['id']
         response = delete.delete_message(

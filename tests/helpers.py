@@ -101,7 +101,6 @@ def send_test_emails(resource, user_id, sender, subject, text, count=1):
 
 
 class GmailTestCase(unittest.TestCase):
-
     """Setups up the resources to test facets of sisu_gmail"""
     def __init__(self, *args, **kwargs):
         super(GmailTestCase, self).__init__(*args, **kwargs)
