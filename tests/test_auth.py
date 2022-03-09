@@ -19,7 +19,7 @@ class TestAuth(helpers.GmailTestCase):
                 settings.TEST_USER_TOKEN,
                 scopes=settings.TEST_AUTH_SCOPES
             )
-            self.assertEqual(None, path_to_token)
+            self.assertEqual('token.json', path_to_token)
 
     def test_creds_from_json(self):
         credentials = src.sisu_gmail.auth.creds_from_json(self.user_token)

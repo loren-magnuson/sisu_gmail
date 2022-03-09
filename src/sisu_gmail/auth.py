@@ -19,6 +19,7 @@ def start_auth_flow(app_creds_path, token_path, scopes):
             token_path,
             scopes
         )
+        return token_path
 
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
@@ -30,6 +31,8 @@ def start_auth_flow(app_creds_path, token_path, scopes):
         with open(token_path, 'w') as token_file:
             token_file.write(creds.to_json())
             return token_path
+
+    return None
 
 
 def authorize_resource(credentials):

@@ -66,15 +66,14 @@ class TestSearch(helpers.GmailTestCase):
         self.assertIn('messages', response)
         self.assertEqual(len(response['messages']), 1)
 
-    # def test_iter_messages(self):
-    #     self.fail('')
-    #     messages = [
-    #         msg for msg in search.iter_messages(
-    #             self.resource,
-    #             self.query
-    #         )
-    #     ]
-    #     self.assertEqual(len(messages), 3)
+    def test_iter_messages(self):
+        messages = [
+            msg for msg in search.iter_messages(
+                self.resource,
+                self.query
+            )
+        ]
+        self.assertEqual(len(messages), 2)
 
 
 if __name__ == '__main__':
