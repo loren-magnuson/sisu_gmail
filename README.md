@@ -1,20 +1,21 @@
-# sisu_gmail - abstractions of the gmail API
-
+# sisu_gmail - abstractions of the Gmail API
 
 Running the tests:
 
-1a) Create an **unused gmail address** for testing
+1) If this is your first test, make an **unused gmail address**
 
-1) git clone https://github.com/loren-magnuson/sisu_gmail
+2) Make sure to delete any welcome emails, etc
 
-2) cd sisu_gmail
+3) git clone https://github.com/loren-magnuson/sisu_gmail && cd sisu_gmail
  
-3) Put your Gmail API enabled credentials JSON in credentials.json
+5) Put your Gmail API enabled credentials JSON in credentials.json
 
-4) python -m unittest
+6) python -m unittest
 
-5) The Gmail API auth flow should start, complete it.
+7) The Gmail API auth flow should start, complete it.
 
-6) Your token will be saved as token.json in the sisu_gmail directory.
+8) Your token will be saved as token.json in the sisu_gmail directory.
 
-7) Tests should now attempt to complete using your creds.
+9) Tests should now attempt to complete using your creds.
+
+10) Before your next test run, delete any left over emails
