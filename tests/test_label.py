@@ -58,7 +58,7 @@ class TestLabel(helpers.GmailTestCase):
         self.assertEqual(response['id'], message_id)
         self.assertIn(label_id, response['labelIds'], )
 
-    def test_get_label_id_by_name(self):
+    def test_get_label_by_name(self):
         label = labeller.get_label_by_name(
             self.resource,
             self.user_id,
