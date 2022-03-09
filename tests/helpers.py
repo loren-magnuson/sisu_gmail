@@ -94,8 +94,8 @@ def send_test_emails(resource, user_id, sender, subject, text, count=1):
             messages.append(response)
         else:
             raise KeyError('Test email failed to send')
+        sleep(1)
     else:
-        # Sleeping here prevents us from trying to operate on "nonexistent" messages
         sleep(3)
         return messages
 

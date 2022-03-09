@@ -17,7 +17,7 @@ class TestDelete(helpers.GmailTestCase):
             count=2
         )
 
-        response = search.search(self.resource, self.query)
+        response = search.search(self.resource, self.user_id, self.query)
         self.assertIn('messages', response)
         messages = response['messages']
         self.assertEqual(len(messages), 2)
@@ -35,7 +35,7 @@ class TestDelete(helpers.GmailTestCase):
         # https://developers.google.com/gmail/api/reference/rest/v1/users.messages/batchDelete
         self.assertEqual(response, '')
 
-        response = search.search(self.resource, self.query)
+        response = search.search(self.resource, self.user_id, self.query)
         self.assertIn('resultSizeEstimate', response)
         self.assertEqual(response['resultSizeEstimate'], 0)
 
@@ -48,20 +48,21 @@ class TestDelete(helpers.GmailTestCase):
             inspect.stack()[0][3],
             count=1
         )[0]['id']
+
         response = delete.delete_message(
             self.resource,
             self.user_id,
             message_id
         )
 
-        # Let Gmail catch up to avoid concurrency issues
-        sleep(3)
-
         # If successful, the response body is empty.
         # https://developers.google.com/gmail/api/reference/rest/v1/users.messages/delete
         self.assertEqual(response, '')
 
-        response = search.search(self.resource, self.query)
+        # Let Gmail catch up to avoid concurrency issues
+        sleep(3)
+
+        response = search.search(self.resource, self.user_id, self.query)
         self.assertIn('resultSizeEstimate', response)
         self.assertEqual(response['resultSizeEstimate'], 0)
 
