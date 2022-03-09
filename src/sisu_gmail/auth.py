@@ -6,9 +6,9 @@ from googleapiclient.discovery import build
 
 
 def start_auth_flow(app_creds_path, token_path, scopes):
-    """Start the google auth flow using app_creds at path_to_app_creds
+    """Start Google auth flow using app_creds at path_to_app_creds
 
-    :param app_creds_path: path_to_app_creds to a app_creds.json file
+    :param app_creds_path: path_to_app_creds to app_creds.json file
     :param token_path: path_to_app_creds to store resulting auth app_creds
     :param scopes: Gmail API permission scope to request
     :return: token_path to the app_creds if created else None
@@ -35,7 +35,7 @@ def start_auth_flow(app_creds_path, token_path, scopes):
 def authorize_resource(credentials):
     """Create an authorized Gmail API resource
 
-    :param credentials:
+    :param credentials: google.oauth2.app_creds.Credentials
     :return: googleapiclient.discovery.Resource
     """
     return build('gmail', 'v1', credentials=credentials)

@@ -1,8 +1,7 @@
 import unittest
-from time import sleep
 from src.sisu_gmail import search, delete
 from src.sisu_gmail.search import NoNextPageToken
-from tests import helpers, settings
+from tests import helpers
 
 
 class TestSearch(helpers.GmailTestCase):

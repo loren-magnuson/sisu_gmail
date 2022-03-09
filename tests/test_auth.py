@@ -32,9 +32,9 @@ class TestAuth(helpers.GmailTestCase):
 
     def test_refresh_token(self):
         credentials = src.sisu_gmail.auth.creds_from_json(self.user_token)
-        old_expirty = credentials.__dict__['expiry']
+        old_expiry = credentials.__dict__['expiry']
         new_expiry = src.sisu_gmail.auth.refresh_token(credentials).__dict__['expiry']
-        self.assertNotEqual(old_expirty, new_expiry)
+        self.assertNotEqual(old_expiry, new_expiry)
 
 
 if __name__ == '__main__':

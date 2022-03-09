@@ -1,8 +1,7 @@
 import unittest
 from time import sleep
-
 from src.sisu_gmail import send, create, delete
-from tests import helpers, settings
+from tests import helpers
 
 
 class TestSend(helpers.GmailTestCase):
