@@ -1,5 +1,4 @@
 import unittest
-from src.sisu_gmail import send, create
 from tests import helpers
 
 

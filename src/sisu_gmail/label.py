@@ -29,3 +29,19 @@ def label_message(resource, message_id, labels):
         body={'addLabelIds': labels}
     ).execute()
     return response
+
+
+def get_label_by_name(resource, user_id, name):
+    """Case insensitive search for a label by name
+
+    :param resource: Gmail API Resource
+    :param user_id: str, Gmail API userId
+    :param name: str, name of label to try to get
+    :return: Gmail label object or None
+    """
+    labels = get_labels(resource, user_id)
+    for label in labels['labels']:
+        if label['name'].lower() == name.lower():
+            return label
+    else:
+        return None

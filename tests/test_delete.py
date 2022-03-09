@@ -1,6 +1,5 @@
 import unittest
 from time import sleep
-
 from src.sisu_gmail import delete, search
 from tests import helpers
 

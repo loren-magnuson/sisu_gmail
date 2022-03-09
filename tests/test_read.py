@@ -1,6 +1,5 @@
 import unittest
-from time import sleep
-from src.sisu_gmail import read, send, create, delete
+from src.sisu_gmail import read
 from tests import helpers
 
 
