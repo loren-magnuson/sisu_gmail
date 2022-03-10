@@ -22,7 +22,7 @@ class TestSend(helpers.GmailTestCase):
         self.assertIn('id', email)
         self.test_emails += email
 
-    def test_send_message_with_excel_attachment(self):
+    def test_send_message_with_xls_attachment(self):
         message = sisu_email.create.create_multipart_message(
             self.test_email_address,
             self.test_email_address,
@@ -42,7 +42,7 @@ class TestSend(helpers.GmailTestCase):
         )
 
         self.assertIn('id', response)
-        self.test_emails += [response]
+        # self.test_emails += [response]
 
 
 if __name__ == '__main__':

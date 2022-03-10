@@ -1,7 +1,6 @@
 import sisu_email.create
 
 
-
 def encode_multipart_message(message):
     """Encode multipart message_id as urlsafe base64 string
 
