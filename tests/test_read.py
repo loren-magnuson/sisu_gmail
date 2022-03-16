@@ -18,7 +18,8 @@ class TestRead(helpers.GmailTestCase):
         self.test_emails += emails
         sent = emails[0]
         self.assertIn('id', sent)
-        retrieved = read.download_message(self.resource, sent['id'])
+
+        retrieved = read.download_message(self.resource, 'me', sent['id'])
         self.assertIn('id', retrieved)
         self.assertEqual(retrieved['id'], sent['id'])
 

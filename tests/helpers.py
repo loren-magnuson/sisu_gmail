@@ -114,6 +114,7 @@ class GmailTestCase(unittest.TestCase):
     def tearDown(self):
         # Just trying to prevent operating on "non-existent" emails
         sleep(3)
+        print(self.test_emails, "test emails")
         if len(self.test_emails) > 0:
             delete.batch_delete(
                 self.resource,
