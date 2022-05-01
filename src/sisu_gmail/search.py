@@ -64,9 +64,7 @@ def iter_messages(resource, user_id, query):
         q=query
     ).execute()
 
-    if 'messages' not in response:
-        raise StopIteration('No messages found')
-    else:
+    if 'messages' in response:
         part = response['messages']
         for index, result in enumerate(part, start=1):
             yield result
