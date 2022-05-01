@@ -65,13 +65,13 @@ def iter_messages(resource, user_id, query):
     ).execute()
 
     if 'messages' not in response:
-        raise StopIteration
-
-    part = response['messages']
-    for index, result in enumerate(part, start=1):
-        yield result
-        if len(part) == index and 'nextPageToken' in response:
-            next_page(resource, user_id, response, query)
+        raise StopIteration('No messages found')
+    else:
+        part = response['messages']
+        for index, result in enumerate(part, start=1):
+            yield result
+            if len(part) == index and 'nextPageToken' in response:
+                next_page(resource, user_id, response, query)
 
 
 def search_by_address(resource, user_id, address):
