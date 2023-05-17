@@ -7,30 +7,20 @@ class NoNextPageToken(KeyError):
     pass
 
 
-def next_page(resource, user_id, query, response, max_results=100):
+def next_page(resource, user_id, query, next_page_token, max_results=100):
     """Get next page of search results
 
     :param resource: Gmail API resource
     :param user_id: str, Gmail API userId
     :param query: str, Gmail API search query
-    :param response: dict, Gmail API search query response
+    :param next_page_token: str, token for next page
     :param max_results: int, number of results per request
     :return: list, dicts of gmail message_id message_ids and thread message_ids
     """
-    if not type(response) is dict:
-        raise TypeError(
-            'next_search_page requires dict as response param'
-        )
-    elif 'nextPageToken' not in response:
-        raise NoNextPageToken(
-            'next_search_page requires dict with nextPageToken key'
-        )
-
-    page_token = response['nextPageToken']
     return resource.users().messages().list(
         userId=user_id,
         q=query,
-        pageToken=page_token,
+        pageToken=next_page_token,
         maxResults=max_results
     ).execute()
 
@@ -59,17 +49,23 @@ def iter_messages(resource, user_id, query):
     :param query: str, Gmail API search query
     :return: dict, gmail message_id message_ids and thread message_ids
     """
+
+    do_next = True
     response = resource.users().messages().list(
         userId=user_id,
         q=query
     ).execute()
-
-    if 'messages' in response:
-        part = response['messages']
-        for index, result in enumerate(part, start=1):
-            yield result
-            if len(part) == index and 'nextPageToken' in response:
-                next_page(resource, user_id, response, query)
+    while do_next:
+        if 'messages' in response:
+            print(len(response['messages']))
+            for result in response['messages']:
+                yield result
+            if 'nextPageToken' in response:
+                response = next_page(resource, user_id, query, response['nextPageToken'])
+            else:
+                do_next = False
+        else:
+            break
 
 
 def search_by_address(resource, user_id, address):

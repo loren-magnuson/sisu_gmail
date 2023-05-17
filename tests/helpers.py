@@ -112,15 +112,15 @@ class GmailTestCase(unittest.TestCase):
         self.test_emails = []
 
     def tearDown(self):
+        pass
         # Just trying to prevent operating on "non-existent" emails
-        sleep(3)
-        print(self.test_emails, "test emails")
-        if len(self.test_emails) > 0:
-            delete.batch_delete(
-                self.resource,
-                self.user_id,
-                message_ids=self.test_emails
-            )
+        # sleep(3)
+        # if len(self.test_emails) > 0:
+        #     delete.batch_delete(
+        #         self.resource,
+        #         self.user_id,
+        #         message_ids=self.test_emails
+        #     )
 
     def set_test_email_address(self):
         self.test_email_address = sisu_gmail.user.get_profile(
